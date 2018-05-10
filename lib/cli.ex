@@ -1,6 +1,6 @@
 defmodule DrawingApp.CLI do
   alias __MODULE__
-  alias DrawingApp.Canvas
+  alias DrawingApp.{Coordinate, Canvas, Painter}
 
   def main(_args) do
     IO.puts "Welcome to the Drawing App"
@@ -33,7 +33,7 @@ defmodule DrawingApp.CLI do
 
     case Canvas.new(width, height) do
       {:ok, canvas} ->
-        IO.puts Canvas.render(canvas)
+        IO.puts Painter.render(canvas)
         receive_command()
       {:error, message} ->
         IO.puts message
