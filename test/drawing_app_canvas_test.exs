@@ -3,36 +3,37 @@ defmodule DrawingApp.CanvasTest do
   doctest DrawingApp.Canvas
 
   test "create a canvas with width 5 and height 4" do
-    expected_coordinates_list = [ %DrawingApp.Coordinate{val: " ", x: 1, y: 1},
-                                  %DrawingApp.Coordinate{val: " ", x: 1, y: 2},
-                                  %DrawingApp.Coordinate{val: " ", x: 1, y: 3},
-                                  %DrawingApp.Coordinate{val: " ", x: 2, y: 1},
-                                  %DrawingApp.Coordinate{val: " ", x: 2, y: 2},
-                                  %DrawingApp.Coordinate{val: " ", x: 2, y: 3},
-                                  %DrawingApp.Coordinate{val: "-", x: 0, y: 0},
-                                  %DrawingApp.Coordinate{val: "-", x: 0, y: 4},
-                                  %DrawingApp.Coordinate{val: "-", x: 1, y: 0},
-                                  %DrawingApp.Coordinate{val: "-", x: 1, y: 4},
-                                  %DrawingApp.Coordinate{val: "-", x: 2, y: 0},
-                                  %DrawingApp.Coordinate{val: "-", x: 2, y: 4},
-                                  %DrawingApp.Coordinate{val: "-\n", x: 3, y: 0},
-                                  %DrawingApp.Coordinate{val: "-\n", x: 3, y: 4},
-                                  %DrawingApp.Coordinate{val: "|", x: 0, y: 1},
-                                  %DrawingApp.Coordinate{val: "|", x: 0, y: 2},
-                                  %DrawingApp.Coordinate{val: "|", x: 0, y: 3},
-                                  %DrawingApp.Coordinate{val: "|\n", x: 3, y: 1},
-                                  %DrawingApp.Coordinate{val: "|\n", x: 3, y: 2},
-                                  %DrawingApp.Coordinate{val: "|\n", x: 3, y: 3}
-                                ]
-    expected_coordinates_mapset =
-      for coord <- expected_coordinates_list, into: MapSet.new() do
-        coord
-      end
+    expected_coordinates_list = [
+      %DrawingApp.Coordinate{val: "-",   x: 0, y: 0},
+      %DrawingApp.Coordinate{val: "-",   x: 1, y: 0},
+      %DrawingApp.Coordinate{val: "-",   x: 2, y: 0},
+      %DrawingApp.Coordinate{val: "-\n", x: 3, y: 0},
+      %DrawingApp.Coordinate{val: "|",   x: 0, y: 1},
+      %DrawingApp.Coordinate{val: " ",   x: 1, y: 1},
+      %DrawingApp.Coordinate{val: " ",   x: 2, y: 1},
+      %DrawingApp.Coordinate{val: "|\n", x: 3, y: 1},
+      %DrawingApp.Coordinate{val: "|",   x: 0, y: 2},
+      %DrawingApp.Coordinate{val: " ",   x: 1, y: 2},
+      %DrawingApp.Coordinate{val: " ",   x: 2, y: 2},
+      %DrawingApp.Coordinate{val: "|\n", x: 3, y: 2},
+      %DrawingApp.Coordinate{val: "|",   x: 0, y: 3},
+      %DrawingApp.Coordinate{val: " ",   x: 1, y: 3},
+      %DrawingApp.Coordinate{val: " ",   x: 2, y: 3},
+      %DrawingApp.Coordinate{val: "|\n", x: 3, y: 3},
+      %DrawingApp.Coordinate{val: "-",   x: 0, y: 4},
+      %DrawingApp.Coordinate{val: "-",   x: 1, y: 4},
+      %DrawingApp.Coordinate{val: "-",   x: 2, y: 4},
+      %DrawingApp.Coordinate{val: "-\n", x: 3, y: 4}
+    ]
+    # expected_coordinates_mapset =
+    #   for coord <- expected_coordinates_list, into: MapSet.new() do
+    #     coord
+    #   end
 
     {:ok, canvas} = DrawingApp.Canvas.new(2, 3)
     assert canvas == %DrawingApp.Canvas{ width: 2,
                                          height: 3,
-                                         coordinates: expected_coordinates_mapset
+                                         coordinates: expected_coordinates_list
                                        }
   end
 

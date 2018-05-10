@@ -12,7 +12,7 @@ defmodule DrawingApp.Canvas do
     width_at_boundary = width + 1
     height_at_boundary = height + 1
     coordinates =
-      for y <- 0..height_at_boundary, x <- 0..width_at_boundary, into: MapSet.new() do
+      for y <- 0..height_at_boundary, x <- 0..width_at_boundary do
         cond do
           ((y == 0 || y == height_at_boundary) && x == width_at_boundary)        -> {:ok, coord} = Coordinate.new(x, y, "-\n"); coord
           ((y != 0 || y != height_at_boundary) && x == width_at_boundary)        -> {:ok, coord} = Coordinate.new(x, y, "|\n"); coord
