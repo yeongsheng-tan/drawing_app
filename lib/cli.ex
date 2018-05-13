@@ -28,16 +28,25 @@ defmodule DrawingApp.CLI do
     IO.puts "\nBye!"
   end
 
-  defp execute_command(["C" | params]) do
-    {width, height} = process_new_canvas_params(params)
+  defp execute_command([command]) do
+    case command do
+      "C" -> {:ok, canvas} = Canvas.new()
+             IO.puts Painter.render(canvas)
+             receive_command()
+      "L" -> "Not implemented yet!"
+      "B" -> "Not implemented yet!"
+      true -> "Unknown Command!"
+    end
+  end
 
-    case Canvas.new(width, height) do
-      {:ok, canvas} ->
-        IO.puts Painter.render(canvas)
-        receive_command()
-      {:error, message} ->
-        IO.puts message
-        receive_command()
+  defp execute_command(["C", width, height]) do
+    with {:ok, {w, h}} <- process_new_canvas_params(width, height),
+         {:ok, canvas} <- Canvas.new(w, h) do
+      IO.puts Painter.render(canvas)
+      receive_command()
+    else
+      {:error, message} ->  IO.puts message
+                            receive_command()
     end
   end
 
@@ -48,12 +57,12 @@ defmodule DrawingApp.CLI do
     receive_command()
   end
 
-  defp process_new_canvas_params([w, h]) do
-    {String.to_integer(w), String.to_integer(h)}
-  end
-
-  defp process_new_canvas_params([]) do
-    {50,50}
+  defp process_new_canvas_params(w, h) do
+    rexp = Regex.compile!("^[0-9]*$")
+    case Regex.match?(rexp, w) && Regex.match?(rexp, h) do
+      true -> {:ok, {String.to_integer(w), String.to_integer(h)}}
+      _    -> {:error, :non_integer_inputs}
+    end
   end
 
   defp print_help_message do
