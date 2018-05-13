@@ -1,6 +1,5 @@
 defmodule DrawingApp.CLI do
-  alias __MODULE__
-  alias DrawingApp.{Coordinate, Canvas, Painter}
+  alias DrawingApp.{Canvas, Painter}
 
   def main(_args) do
     IO.puts "Welcome to the Drawing App"

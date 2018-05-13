@@ -1,6 +1,7 @@
 # DrawingApp
 #### A simple console drawing program.
 #### The currently implemented features allow you to perform the following action
+##### [Source on Github](https://github.com/yeongsheng-tan/drawing_app)
 ---
 ###### 1. Creates a new canvas for a specified positive integer width and height (max of 50 x 50 allowed)
 ###### 2. Quit
